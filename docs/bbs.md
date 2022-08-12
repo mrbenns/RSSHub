@@ -4,6 +4,30 @@ pageClass: routes
 
 # 论坛
 
+## 19 楼
+
+### 头条
+
+<Route author="nczitzk" example="/19lou/jiaxing" path="/19lou/:city?" :paramsDesc="['分类，见下表，默认为 www，即杭州']">
+
+| 杭州  | 台州      | 嘉兴      | 宁波     | 湖州     |
+| --- | ------- | ------- | ------ | ------ |
+| www | taizhou | jiaxing | ningbo | huzhou |
+
+| 绍兴       | 湖州     | 温州      | 金华     | 舟山       |
+| -------- | ------ | ------- | ------ | -------- |
+| shaoxing | huzhou | wenzhou | jinhua | zhoushan |
+
+| 衢州     | 丽水     | 义乌   | 萧山       | 余杭     |
+| ------ | ------ | ---- | -------- | ------ |
+| quzhou | lishui | yiwu | xiaoshan | yuhang |
+
+| 临安    | 富阳     | 桐庐     | 建德     | 淳安     |
+| ----- | ------ | ------ | ------ | ------ |
+| linan | fuyang | tonglu | jiande | chunan |
+
+</Route>
+
 ## 2047
 
 ### 分类
@@ -176,11 +200,29 @@ pageClass: routes
 
 </Route>
 
+## Elastic 中文社区
+
+### 发现
+
+<Route author="nczitzk" example="/elasticsearch-cn" path="/elasticsearch-cn/:params?" :paramsDesc="['分类，可在对应分类页 URL 中找到']">
+
+如 [Elasticsearch 最新](https://elasticsearch.cn/category-2) 的 URL 为 <https://elasticsearch.cn/category-2>，则分类参数处填写 `category-2`，最后得到路由地址 [`/elasticsearch-cn/category-2`](https://rsshub.app/elasticsearch-cn/category-2)。
+
+又如 [求职招聘 30 天热门](https://elasticsearch.cn/sort_type-hot\_\_\_\_category-12\__day-30) 的 URL 为 <https://elasticsearch.cn/sort_type-hot____category-12__day-30>，则分类参数处填写 `sort_type-hot____category-12__day-30`，最后得到路由地址 [`/elasticsearch-cn/sort_type-hot____category-12__day-30`](https://rsshub.app/elasticsearch-cn/sort_type-hot\_\_\_\_category-12\__day-30)。
+
+</Route>
+
 ## eTOLAND
 
 ### 主题贴
 
 <Route author="mengx8" example="/etoland/star01" path="/etoland/:boardId" :paramsDesc="['板块 id，可在板块 URL 找到']" radar="1" rssbud="1"/>
+
+## HACKER TALK 黑客说
+
+### 最新帖子
+
+<Route author="hyoban" example="/hackertalk" path="/hackertalk" radar="1" rssbud="1"/>
 
 ## LearnKu
 
@@ -242,7 +284,35 @@ pageClass: routes
 
 ### 帖子
 
-<Route author="xyqfer" example="/nga/post/18449558" path="/nga/post/:tid"  :paramsDesc="['帖子 id, 可在帖子 URL 找到']" radar="1" rssbud="1"/>
+<Route author="xyqfer syrinka" example="/nga/post/18449558" path="/nga/post/:tid/:authorId?"  :paramsDesc="['帖子 id, 可在帖子 URL 找到', '作者 id']" radar="1" rssbud="1"/>
+
+## PLAYNO.1 玩樂達人
+
+### AV
+
+::: warning 注意
+
+目前观测到该博客可能禁止日本 IP 访问。建议部署在日本区以外的服务器上。
+
+:::
+
+<Route author="TonyRL" example="/playno1/av" path="/playno1/av/:catid?" :paramsDesc="['分类，见下表，默认为全部文章']" radar="1" rssbud="1">
+
+| 全部文章 | AV 新聞 | AV 導覽 |
+| ---- | ----- | ----- |
+| 78   | 3     | 5     |
+
+</Route>
+
+### 情趣
+
+<Route author="TonyRL" example="/playno1/st" path="/playno1/st/:catid?" :paramsDesc="['分类，见下表，默认为全部文章']" radar="1" rssbud="1">
+
+| 全部文章 | 情趣體驗報告     | 情趣新聞 | 情趣研究所    |
+| ---- | ---------- | ---- | -------- |
+| all  | experience | news | graduate |
+
+</Route>
 
 ## RF 技术社区
 
@@ -346,6 +416,12 @@ pageClass: routes
 
 </Route>
 
+## 第一会所
+
+### 子版块
+
+<Route author="TonyRL" example="/sis001/forum/322" path="/sis001/forum/:id?" :paramsDesc="['子版块 ID，可在子论坛 URL 找到，默认为 `Funny Jokes | 短篇笑话区`']" radar="1" rssbud="1"/>
+
 ## 电鸭社区
 
 ### 工作机会
@@ -358,6 +434,26 @@ pageClass: routes
 
 <Route author="nczitzk" example="/right/forum/31" path="/right/forum/:id?" :paramsDesc="['板块 id，可在板块页 URL 中找到']"/>
 
+## 二次元虫洞
+
+### 板块
+
+<Route author="shelken" example="/2cycd/43/dateline" path="/2cycd/:fid?/:sort?" :paramsDesc="['板块', '排序']" radar="1">
+
+板块（更多板块请自行 [查看](http://www.2cycd.com)）
+
+| 音乐下载（默认） | 动漫下载 | 游戏下载 |
+| -------- | ---- | ---- |
+| 43       | 53   | 42   |
+
+排序
+
+| 发布时间排序（默认） | 回复／查看   | 查看    |
+| ---------- | ------- | ----- |
+| dateline   | replies | views |
+
+</Route>
+
 ## 光谷社区
 
 ### 子论坛
@@ -367,6 +463,46 @@ pageClass: routes
 | 首页 | 你问我答 | 同城活动     | IT 技术 | 金融财经    | 创业创客    | 城市建设 |
 | -- | ---- | -------- | ----- | ------- | ------- | ---- |
 |    | qna  | lowshine | it    | finance | startup | city |
+
+</Route>
+
+## 海角社区
+
+### 热门
+
+<Route author="nczitzk" example="/hjedd/hot" path="/hjedd/hot"/>
+
+### 新闻
+
+<Route author="nczitzk" example="/hjedd/news" path="/hjedd/news"/>
+
+### 大事记
+
+<Route author="nczitzk" example="/hjedd/event" path="/hjedd/event"/>
+
+### 原创
+
+<Route author="nczitzk" example="/hjedd/original" path="/hjedd/original"/>
+
+### 精华
+
+<Route author="nczitzk" example="/hjedd/top" path="/hjedd/top"/>
+
+### 公告
+
+<Route author="nczitzk" example="/hjedd/notice" path="/hjedd/notice"/>
+
+### 最新
+
+<Route author="nczitzk" example="/hjedd/latest" path="/hjedd/latest"/>
+
+### 文章
+
+<Route author="nczitzk" example="/hjedd/1288/1" path="/hjedd/:node?/:type?" :paramsDesc="['节点 id，可在对应节点页 URL 中找到，默认为 `258`，即 大事记', '类型 id，见下表，默认为 `0`，即 默认']">
+
+| 默认 | 最新 | 热门 | 精华 | 悬赏 | 出售 |
+| -- | -- | -- | -- | -- | -- |
+| 0  | 1  | 2  | 3  | 4  | 5  |
 
 </Route>
 
@@ -696,6 +832,18 @@ pageClass: routes
 
 <Route author="nczitzk" example="/creaders/headline" path="/creaders/headline"/>
 
+## 威锋
+
+### 社区
+
+<Route author="TonyRL" example="/feng/forum/1" path="/feng/forum/:id/:type?" :paramsDesc="['版块 ID，可在版块 URL 找到', '排序，见下表，默认为 `all`']" radar="1" rssbud="1">
+
+| 最新回复   | 最新发布 | 热门  | 精华      |
+| ------ | ---- | --- | ------- |
+| newest | all  | hot | essence |
+
+</Route>
+
 ## 文学城
 
 ### 博客
@@ -933,7 +1081,7 @@ pageClass: routes
 
 ### 分类
 
-<Route author="sanmmm" example="/lingyi/qiwenyishi" path="/lingyi/:qiwenyishi" :paramsDesc="['分类']"> 
+<Route author="sanmmm" example="/lingyi/qiwenyishi" path="/lingyi/:qiwenyishi" :paramsDesc="['分类']">
 
 | 编辑推荐    | 奇闻异事       | 鬼话连篇           |
 | ------- | ---------- | -------------- |

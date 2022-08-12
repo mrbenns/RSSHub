@@ -36,6 +36,10 @@ Tiny Tiny RSS 会给所有 iframe 元素添加 `sandbox="allow-scripts"` 属性�
 
 <Route author="DIYgod" example="/bilibili/user/video/2267573" path="/bilibili/user/video/:uid/:disableEmbed?" :paramsDesc="['用户 id, 可在 UP 主主页中找到', '默认为开启内嵌视频, 任意值为关闭']" anticrawler="1" radar="1" rssbud="1"/>
 
+### UP 主所有视频
+
+<Route author="CcccFz" example="/bilibili/user/video-all/436361287" path="/bilibili/user/video-all/:uid/:disableEmbed?" :paramsDesc="['用户 id, 可在 UP 主主页中找到', '默认为开启内嵌视频, 任意值为关闭']" anticrawler="1" radar="1" rssbud="1"/>
+
 ### UP 主专栏
 
 <Route author="lengthmin" example="/bilibili/user/article/334958638" path="/bilibili/user/article/:uid" :paramsDesc="['用户 id, 可在 UP 主主页中找到']" anticrawler="1" radar="1" rssbud="1"/>
@@ -289,6 +293,10 @@ Tiny Tiny RSS 会给所有 iframe 元素添加 `sandbox="allow-scripts"` 属性�
 ### 会员购作品
 
 <Route author="DIYgod" example="/bilibili/mall/ip/0_3000294" path="/bilibili/mall/ip/:id" :paramsDesc="['作品 id, 可在作品列表页 URL 中找到']"/>
+
+### 综合热门
+
+<Route author="ziminliu" example="/bilibili/popular/all" path="/bilibili/popular/all" />
 
 ### 排行榜
 
@@ -736,11 +744,23 @@ Instagram Stories 没有可靠的 guid，你的 RSS 阅读器可能将同一条 
 
 ### 关键词
 
-<Route author="DIYgod yindaheng98 Rongronggg9" example="/twitter/keyword/RSSHub" path="/twitter/keyword/:keyword/:routeParams?/limit?" :paramsDesc="['关键词', '额外参数；请参阅上面的说明和表格', '查询前多少条']" radar="1" rssbud="1"/>
+<Route author="DIYgod yindaheng98 Rongronggg9" example="/twitter/keyword/RSSHub" path="/twitter/keyword/:keyword/:routeParams?" :paramsDesc="['关键词', '额外参数；请参阅上面的说明和表格']" radar="1" rssbud="1"/>
 
 ### Trends
 
-<Route author="sakamossan" example="/twitter/trends/23424856" path="/twitter/trends/:woeid?" :paramsDesc="['Where On Earth ID. 默认 woeid=1 (World Wide)']" radar="1" rssbud="1"/>
+<Route author="sakamossan" example="/twitter/trends/23424856" path="/twitter/trends/:woeid?" :paramsDesc="['Where On Earth ID. 默认 `1` (World Wide)']" radar="1" rssbud="1"/>
+
+### 推文收集
+
+<Route author="TonyRL" example="/twitter/collection/DIYgod/1527857429467172864" path="/twitter/collection/:uid/:collectionId/:routeParams?" :paramsDesc="['用户名，需与生成的 Twitter token 对应', '推文收集 ID，可从 URL 获得', '额外参数；请参阅上面的说明和表格']" radar="1" rssbud="1" selfhost="1"/>
+
+::: warning 注意
+
+推文收集需要用户的 Twitter token，所以只能自建，详情见部署页面的配置模块。
+
+:::
+
+</Route>
 
 ## Vimeo
 
@@ -800,6 +820,10 @@ YouTube 官方亦有提供频道 RSS，形如 <https://www.youtube.com/feeds/vid
 
 <Route author="HenryQW" example="/youtube/playlist/PLqQ1RwlxOgeLTJ1f3fNMSwhjVgaWKo_9Z" path="/youtube/playlist/:id/:disableEmbed?" :paramsDesc="['播放列表 id', '默认为开启内嵌视频, 任意值为关闭']" radar="1" rssbud="1"/>
 
+### 订阅列表
+
+<Route author="TonyRL" path="/youtube/subscriptions/:embed?" example="/youtube/subscriptions" :paramsDesc="['默认为开启内嵌视频, 任意值为关闭']" selfhost="1" radar="1" rssbud="1"/>
+
 ## 巴哈姆特
 
 ### 个人小屋
@@ -846,32 +870,34 @@ YouTube 官方亦有提供频道 RSS，形如 <https://www.youtube.com/feeds/vid
 
 ## 抖音
 
-### 博主
-
-<Route author="Max-Tortoise Rongronggg9" example="/douyin/user/MS4wLjABAAAARcAHmmF9mAG3JEixq_CdP72APhBlGlLVbN-1eBcPqao" path="/douyin/user/:uid/:routeParams?" :paramsDesc="['uid，可在 URL 中找到', '额外参数，query string 格式，请参阅下面的表格']" anticrawler="1" radar="1" rssbud="1" puppeteer="1">
-
-| 键        | 含义                                  | 值                      | 默认值     |
-| -------- | ----------------------------------- | ---------------------- | ------- |
-| `embed`  | 是否启用内嵌视频                            | `0`/`1`/`true`/`false` | `false` |
-| `iframe` | 是否启用 iframe 变通解决方案，仅在内嵌视频开启时有效，详见下文 | `0`/`1`/`true`/`false` | `false` |
-| `relay`  | 视频反代服务的 URL，仅在内嵌视频开启时有效，详见下文        |                        |         |
-
 ::: warning 注意
 
 反爬严格，需要启用 puppeteer。\
 抖音的视频 CDN 会验证 Referer，意味着许多阅读器都无法直接播放内嵌视频，以下是一些变通解决方案：
 
-1.  填写 `relay`，开启视频反代 (推荐，适合大部分阅读器)。如该服务接受直接拼接 URL，则可直接填入路径，如 `https://example.com/` ；如该服务仅接受 URL 作为参数传入，则确保该参数置于末尾，如 `https://example.com/?url=` 。注意：该服务必须跟随跳转、允许反代视频，且必须在反代时丢弃 Referer 请求头。[这里有一个符合要求的易于自行搭建的项目](https://github.com/Rongronggg9/rsstt-img-relay)，该项目接受直接拼接 URL。
-2.  启用 iframe 变通解决方案，禁止阅读器发送 Referer。支持该变通解决方案的阅读器较少，且可能造成显示错误。有些阅读器，如 RSS Guard、Akregator，可能不支持前一种方法，则可尝试此方法。
-3.  使用不发送 Referer 的阅读器，如 [Inoreader 网页版](https://www.inoreader.com/)配合[禁用 referer 的 user script](https://greasyfork.org/zh-CN/scripts/376884-%E6%98%BE%E7%A4%BA%E9%98%B2%E7%9B%97%E9%93%BE%E5%9B%BE%E7%89%87-for-inoreader)、[RSS to Telegram Bot](https://github.com/Rongronggg9/RSS-to-Telegram-Bot) 等。如果你的阅读器能够在不启用上述两个变通解决方案时成功播放内嵌视频，那么它就是不发送 Referer 的，请考虑添加到文档里帮助更多的人。
-4.  关闭内嵌视频 (`embed=0`)，手动点击 `视频直链` 超链接，一般情况下均可成功播放视频。若仍然出现 HTTP 403，请复制 URL 以后到浏览器打开。
-5.  点击原文链接打开抖音网页版的视频详情页播放视频。
-
-上述外部链接与 RSSHub 无关。
+1.  启用内嵌视频 (`embed=1`), 参考 [通用参数 -> 多媒体处理](/parameter.html#duo-mei-ti-chu-li) 配置 `multimedia_hotlink_template` **或** `wrap_multimedia_in_iframe`。
+2.  关闭内嵌视频 (`embed=0`)，手动点击 `视频直链` 超链接，一般情况下均可成功播放视频。若仍然出现 HTTP 403，请复制 URL 以后到浏览器打开。
+3.  点击原文链接打开抖音网页版的视频详情页播放视频。
 
 :::
 
-</Route>
+额外参数
+
+| 键       | 含义       | 值                      | 默认值     |
+| ------- | -------- | ---------------------- | ------- |
+| `embed` | 是否启用内嵌视频 | `0`/`1`/`true`/`false` | `false` |
+
+### 博主
+
+<Route author="Max-Tortoise Rongronggg9" example="/douyin/user/MS4wLjABAAAARcAHmmF9mAG3JEixq_CdP72APhBlGlLVbN-1eBcPqao" path="/douyin/user/:uid/:routeParams?" :paramsDesc="['uid，可在用户页面 URL 中找到', '额外参数，query string 格式，请参阅上面的表格']" anticrawler="1" radar="1" rssbud="1" puppeteer="1" />
+
+### 标签
+
+<Route author="TonyRL" example="/douyin/hashtag/1592824105719812" path="/douyin/hashtag/:cid/:routeParams?" :paramsDesc="['标签 ID，可在标签页面 URL 中找到', '额外参数，query string 格式，请参阅上面的表格']" anticrawler="1" radar="1" rssbud="1" puppeteer="1" />
+
+### 直播
+
+见 [#抖音直播](/live.html#dou-yin-zhi-bo)
 
 ## 豆瓣
 
@@ -1140,6 +1166,16 @@ YouTube 官方亦有提供频道 RSS，形如 <https://www.youtube.com/feeds/vid
 
 <Route author="ihewro" example="/meipai/user/56537299" path="/meipai/user/:id" :paramsDesc="['用户 id, 可在 分享出去获得的用户主页 URL 中找到']"/>
 
+## 全民 K 歌
+
+### 用户作品列表
+
+<Route author="zhangxiang012" example="/qq/kg/639a9a86272c308e33" path="/qq/kg/:userId" :paramsDesc="['用户 ID, 可在对应页面的 URL 中找到']" radar="1" rssaid="1" supportPodcast="1"/>
+
+### 用户作品评论动态
+
+<Route author="zhangxiang012" example="/qq/kg/reply/OhXHMdO1VxLWQOOm" path="/qq/kg/reply/:playId" :paramsDesc="['音频页 ID, 可在对应页面的 URL 中找到']" radar="1" rssaid="1"/>
+
 ## 数字尾巴
 
 ### 首页
@@ -1272,7 +1308,7 @@ rule
 
 ### 个人时间线
 
-<Route author="zytomorrow DIYgod Rongronggg9" example="/weibo/timeline/3306934123" path="/weibo/timeline/:uid/:feature?/:routeParams?" :paramsDesc="['用户的uid', '	过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。', '额外参数；请参阅上面的说明和表格']" anticrawler="1" selfhost="1">
+<Route author="zytomorrow DIYgod Rongronggg9" example="/weibo/timeline/3306934123" path="/weibo/timeline/:uid/:feature?/:routeParams?" :paramsDesc="['用户的uid', '过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。', '额外参数；请参阅上面的说明和表格']" anticrawler="1" selfhost="1">
 
 ::: warning 注意
 
@@ -1308,17 +1344,17 @@ rule
 
 ## 小红书
 
-### 用户笔记和专辑
+### 用户笔记
 
-<Route author="lotosbin" example="/xiaohongshu/user/593032945e87e77791e03696/notes" path="/xiaohongshu/user/:user_id/notes" :paramsDesc="['user_id']" puppeteer="1"/>
+<Route author="lotosbin" example="/xiaohongshu/user/593032945e87e77791e03696/notes" path="/xiaohongshu/user/:user_id/notes" :paramsDesc="['用户 ID']" puppeteer="1" anticrawler="1" radar="1" rssbud="1"/>
 
 ### 用户专辑
 
-<Route author="lotosbin" example="/xiaohongshu/user/593032945e87e77791e03696/album" path="/xiaohongshu/user/:user_id/album" :paramsDesc="['user_id']" puppeteer="1"/>
+<Route author="lotosbin" example="/xiaohongshu/user/593032945e87e77791e03696/album" path="/xiaohongshu/user/:user_id/album" :paramsDesc="['用户 ID']" puppeteer="1" anticrawler="1" radar="1" rssbud="1"/>
 
 ### 专辑
 
-<Route author="lotosbin" example="/xiaohongshu/board/5db6f79200000000020032df" path="/xiaohongshu/board/:board_id" :paramsDesc="['board_id']" puppeteer="1"/>
+<Route author="lotosbin" example="/xiaohongshu/board/5db6f79200000000020032df" path="/xiaohongshu/board/:board_id" :paramsDesc="['专辑 ID']" puppeteer="1" anticrawler="1" radar="1" rssbud="1"/>
 
 ## 新榜
 
@@ -1393,7 +1429,7 @@ rule
 
 ### 问题
 
-<Route author="xyqfer hacklu" example="/zhihu/question/59895982" path="/zhihu/question/:questionId" :paramsDesc="['问题 id']" anticrawler="1" radar="1" rssbud="1"/>
+<Route author="xyqfer hacklu" example="/zhihu/question/59895982" path="/zhihu/question/:questionId/:sortBy?" :paramsDesc="['问题 id', '排序方式：`default`, `created`, `updated`。默认为 `default`']" anticrawler="1" radar="1" rssbud="1"/>
 
 ### 话题
 
