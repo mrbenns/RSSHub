@@ -327,6 +327,9 @@
     "/bilibili/bangumi/media/:mediaid": [
         "DIYgod"
     ],
+    "/bilibili/collection/:uid/:sid/:disableEmbed?": [
+        "shininome"
+    ],
     "/bilibili/fav/:uid/:fid/:disableEmbed?": [
         "Qixingchen"
     ],
@@ -2036,6 +2039,9 @@
     ],
     "/leetcode/dailyquestion/:lang": [
         "NavePnow"
+    ],
+    "/leetcode/dailyquestion/solution/:lang": [
+        "woaidouya123"
     ],
     "/leetcode/submission/:country/:user": [
         "NathanDai"
