@@ -10399,6 +10399,19 @@
       }
     ]
   },
+  "nua.edu.cn": {
+    "_name": "南京艺术学院",
+    "grad": [
+      {
+        "title": "研究生处",
+        "docs": "https://docs.rsshub.app/university.html#nan-jing-yi-shu-xue-yuan",
+        "source": [
+          "/:type/list.htm"
+        ],
+        "target": "/nua/gra/:type"
+      }
+    ]
+  },
   "nuaa.edu.cn": {
     "_name": "南京航空航天大学",
     "aao": [
@@ -11999,6 +12012,23 @@
           "/t/:tag/blogs"
         ],
         "target": "/segmentfault/blogs/:tag"
+      }
+    ]
+  },
+  "sensortower.com": {
+    "_name": "Sensor Tower",
+    ".": [
+      {
+        "title": "Blog",
+        "docs": "https://docs.rsshub.app/new-media.html#sensor-tower-blog",
+        "source": [
+          "/blog",
+          "/zh-CN/blog",
+          "/ja/blog",
+          "/ko/blog",
+          "/"
+        ],
+        "target": "/sensortower/blog"
       }
     ]
   },
@@ -15334,6 +15364,19 @@
           "/notice/list.htm"
         ],
         "target": "/zuel/notice"
+      }
+    ]
+  },
+  "zuvio.com.tw": {
+    "_name": "Zuvio",
+    "irs": [
+      {
+        "title": "校園話題",
+        "docs": "https://docs.rsshub.app/bbs.html#zuvio",
+        "source": [
+          "/student5/chickenM/articles/:board",
+          "/student5/chickenM/articles"
+        ]
       }
     ]
   },
