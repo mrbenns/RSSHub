@@ -765,6 +765,42 @@
         docs:"https://docs.rsshub.app/bbs.html#yin-pin-ying-yong",
         source:[ "/all.php" ],
         target:"/audiobar/latest" } ] },
+  "baidu.com":{ _name:"贴吧",
+    tieba:[ { title:"帖子列表",
+        docs:"https://docs.rsshub.app/bbs.html#bai-du-tie-ba",
+        source:"f",
+        target:(params, url) => {
+                    const type = new URL(url).searchParams.get('tab');
+                    if (!type || type === 'main') {
+                        return `/tieba/forum/${new URL(url).searchParams.get('kw')}`;
+                    }
+                } },
+      { title:"精品帖子",
+        docs:"https://docs.rsshub.app/bbs.html#bai-du-tie-ba",
+        source:"f",
+        target:(params, url) => {
+                    const type = new URL(url).searchParams.get('tab');
+                    if (type === 'good') {
+                        return `/tieba/forum/good/${new URL(url).searchParams.get('kw')}`;
+                    }
+                } },
+      { title:"帖子动态",
+        docs:"https://docs.rsshub.app/bbs.html#bai-du-tie-ba",
+        source:"/p/:id",
+        target:"/tieba/post/:id" },
+      { title:"只看楼主",
+        docs:"https://docs.rsshub.app/bbs.html#bai-du-tie-ba",
+        source:"/p/:id",
+        target:"/tieba/post/lz/:id" },
+      { title:"用户帖子",
+        docs:"https://docs.rsshub.app/bbs.html#tie-ba",
+        source:"/home/main",
+        target:(params, url) => {
+                    const uid = new URL(url).searchParams.get('un');
+                    if (uid) {
+                        return `/tieba/user/${uid}`;
+                    }
+                } } ] },
   "baijingapp.com":{ _name:"白鲸出海",
     ".":[ { title:"最新",
         docs:"https://docs.rsshub.app/new-media.html#bai-jing-chu-hai",
@@ -1645,6 +1681,11 @@
         docs:"https://docs.rsshub.app/new-media.html#dong-qiu-di",
         source:[ "/news/ddh" ],
         target:"/diandong/ddh/:cate" } ] },
+  "diershoubing.com":{ _name:"二柄 APP",
+    ".":[ { title:"新闻",
+        docs:"https://docs.rsshub.app/game.html#er-bing-app",
+        source:[ "/" ],
+        target:"/diershoubing/news" } ] },
   "disinfo.eu":{ _name:"EU Disinfo Lab",
     ".":[ { title:"Publications",
         docs:"https://docs.rsshub.app/new-media.html#eu-disinfo-lab",
@@ -8383,6 +8424,12 @@
         docs:"https://docs.rsshub.app/anime.html#x-man-hua",
         source:[ "/:uid" ],
         target:"/xmanhua/:uid" } ] },
+  "xmnn.cn":{ _name:"厦门网",
+    epaper:[ { title:"数字媒体",
+        docs:"https://docs.rsshub.app/traditional-media.html#xia-men-wang-shu-zi-mei-ti",
+        source:[ "/:id",
+          "/" ],
+        target:"/xmnn/epaper/:id" } ] },
   "danjuanapp.com":{ _name:"雪球",
     ".":[ { title:"蛋卷基金净值更新",
         docs:"https://docs.rsshub.app/finance.html#xue-qiu",
@@ -8948,42 +8995,6 @@
         docs:"https://docs.rsshub.app/program-update.html#pu-gong-ying-ying-yong-fen-fa",
         source:"/:app",
         target:"/pgyer/:app" } ] },
-  "baidu.com":{ _name:"贴吧",
-    tieba:[ { title:"帖子列表",
-        docs:"https://docs.rsshub.app/bbs.html#tie-ba",
-        source:"f",
-        target:(params, url) => {
-                    const type = new URL(url).searchParams.get('tab');
-                    if (!type || type === 'main') {
-                        return `/tieba/forum/${new URL(url).searchParams.get('kw')}`;
-                    }
-                } },
-      { title:"精品帖子",
-        docs:"https://docs.rsshub.app/bbs.html#tie-ba",
-        source:"f",
-        target:(params, url) => {
-                    const type = new URL(url).searchParams.get('tab');
-                    if (type === 'good') {
-                        return `/tieba/forum/good/${new URL(url).searchParams.get('kw')}`;
-                    }
-                } },
-      { title:"帖子动态",
-        docs:"https://docs.rsshub.app/bbs.html#tie-ba",
-        source:"/p/:id",
-        target:"/tieba/post/:id" },
-      { title:"只看楼主",
-        docs:"https://docs.rsshub.app/bbs.html#tie-ba",
-        source:"/p/:id",
-        target:"/tieba/post/lz/:id" },
-      { title:"用户帖子",
-        docs:"https://docs.rsshub.app/bbs.html#tie-ba",
-        source:"/home/main",
-        target:(params, url) => {
-                    const uid = new URL(url).searchParams.get('un');
-                    if (uid) {
-                        return `/tieba/user/${uid}`;
-                    }
-                } } ] },
   "wineyun.com":{ _name:"酒云网",
     www:[ { title:"最新商品",
         docs:"https://docs.rsshub.app/other.html#jiu-yun-wang",
